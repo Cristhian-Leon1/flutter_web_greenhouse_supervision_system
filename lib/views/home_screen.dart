@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_web_greenhouse_supervision_system/widgets/CardInvernadero.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/greenhouse_card.dart';
 import 'monitoring_screen.dart';
 
 
@@ -97,10 +97,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderos(
-                      titulo: 'Invernadero 1',
-                      imagen: Image.asset('assets/invernadero.png', width: width * 0.12),
-                      descripcion: 'En este apartado se monitorea el invernadero numero 1 que contiene un cultivo de remolacha.',
+                    child: GreenhouseCard(
+                      title: 'Invernadero 1',
+                      image: Image.asset('assets/invernadero.png', width: width * 0.12),
+                      description: 'En este apartado se monitorea el invernadero numero 1 que contiene un cultivo de remolacha.',
                     ),
                   ),
                   GestureDetector(
@@ -115,10 +115,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderos(
-                      imagen: Image.asset('assets/invernadero1.png', width: width * 0.12),
-                      titulo: 'Invernadero 2',
-                      descripcion: 'En este apartado se monitorea el invernadero numero 2 que contiene un cultivo de remolacha.'
+                    child: GreenhouseCard(
+                      image: Image.asset('assets/invernadero1.png', width: width * 0.12),
+                      title: 'Invernadero 2',
+                      description: 'En este apartado se monitorea el invernadero numero 2 que contiene un cultivo de remolacha.'
                     ),
                   ),
                   GestureDetector(
@@ -133,10 +133,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderos(
-                      imagen: Image.asset('assets/invernadero2.png', width: width * 0.12),
-                      titulo: 'Invernadero 3',
-                      descripcion: 'En este apartado se monitorea el invernadero numero 3 que contiene cultivos de rosas rojas.'
+                    child: GreenhouseCard(
+                      image: Image.asset('assets/invernadero2.png', width: width * 0.12),
+                      title: 'Invernadero 3',
+                      description: 'En este apartado se monitorea el invernadero numero 3 que contiene cultivos de rosas rojas.'
                     ),
                   ),
                 ],
@@ -156,10 +156,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderosCell(
-                      imagen: Image.asset('assets/invernadero.png', width: width * 0.2),
-                      titulo: 'Invernadero 1',
-                      descripcion: 'En este invernadero se monitorean cultivos de remolacha.'
+                    child: GreenhouseCardCell(
+                      image: Image.asset('assets/invernadero.png', width: width * 0.2),
+                      title: 'Invernadero 1',
+                      description: 'En este invernadero se monitorean cultivos de remolacha.'
                     ),
                   ),
                   GestureDetector(
@@ -174,10 +174,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderosCell(
-                      imagen: Image.asset('assets/invernadero1.png', width: width * 0.2),
-                      titulo: 'Invernadero 2',
-                      descripcion: 'En este invernadero se monitorean cultivos de remolacha.'
+                    child: GreenhouseCardCell(
+                      image: Image.asset('assets/invernadero1.png', width: width * 0.2),
+                      title: 'Invernadero 2',
+                      description: 'En este invernadero se monitorean cultivos de remolacha.'
                     ),
                   ),
                   GestureDetector(
@@ -192,10 +192,10 @@ class _HomePageState extends State<HomePage> {
                         )
                       );
                     },
-                    child: CardInvernaderosCell(
-                      imagen: Image.asset('assets/invernadero2.png', width: width * 0.2),
-                      titulo: 'Invernadero 3',
-                      descripcion: 'En este apartado se monitorea el invernadero numero 3 que contiene cultivos de arveja.'
+                    child: GreenhouseCardCell(
+                      image: Image.asset('assets/invernadero2.png', width: width * 0.2),
+                      title: 'Invernadero 3',
+                      description: 'En este apartado se monitorea el invernadero numero 3 que contiene cultivos de arveja.'
                     ),
                   ),
                 ],

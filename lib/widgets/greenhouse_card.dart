@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CardInvernaderos extends StatelessWidget {
+class GreenhouseCard extends StatelessWidget {
+  final Widget image;
+  final String title;
+  final String description;
 
-  late final Widget imagen;
-  late final String titulo;
-  late final String descripcion;
-
-  CardInvernaderos({super.key, required this.imagen,required this.titulo,required this.descripcion});
+  const GreenhouseCard({super.key,
+    required this.image,
+    required this.title,
+    required this.description});
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -30,7 +31,7 @@ class CardInvernaderos extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Text(
-                  titulo,
+                  title,
                   style: TextStyle(
                     //fontWeight: FontWeight.bold,
                     color: const Color(0xfff7f7f7),
@@ -45,11 +46,11 @@ class CardInvernaderos extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  imagen,
+                  image,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
-                      descripcion,
+                      description,
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -63,17 +64,18 @@ class CardInvernaderos extends StatelessWidget {
   }
 }
 
-class CardInvernaderosCell extends StatelessWidget {
+class GreenhouseCardCell extends StatelessWidget {
+  final Widget image;
+  final String title;
+  final String description;
 
-  late final Widget imagen;
-  late final String titulo;
-  late final String descripcion;
-
-  CardInvernaderosCell({super.key, required this.imagen,required this.titulo,required this.descripcion});
+  const GreenhouseCardCell({super.key,
+    required this.image,
+    required this.title,
+    required this.description});
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -93,7 +95,7 @@ class CardInvernaderosCell extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Text(
-                  titulo,
+                  title,
                   style: TextStyle(
                     //fontWeight: FontWeight.bold,
                     color: const Color(0xfff7f7f7),
@@ -109,12 +111,12 @@ class CardInvernaderosCell extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Flexible(child: imagen),
+                    Flexible(child: image),
                     Flexible(
                       flex: 2,
                       child: SingleChildScrollView(
                         child: Text(
-                          descripcion,
+                          description,
                           textAlign: TextAlign.center,
                           maxLines: width > 600 ? 3 : 6,
                         ),

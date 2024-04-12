@@ -1,7 +1,7 @@
-import 'package:flutter_web_greenhouse_supervision_system/widgets/Graf1Linea.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/single_variable_graph.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_greenhouse_supervision_system/widgets/CardVariables.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/variable_card.dart';
 
 List<List<Widget>> getGridData(String temperature, String humidity, String humidityS1, String humidityS2,
                                String co2, String co2S1, String co2S2, int greenhouseNum,
@@ -11,21 +11,21 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Row 1
     [
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Temperatura medida:",
-          valor: temperature,
-          tipoGrafica: 1,
+        child: VariableCardWeb(
+          title: "Temperatura medida:",
+          value: temperature,
+          chartType: 1,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad suelo 1:",
-          valor: humidityS1,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad suelo 1:",
+          value: humidityS1,
+          chartType: 2,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -33,21 +33,21 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Lista fila 2
     [
       Expanded(
-        child: CardVariableWeb(
-          titulo: "CO₂:",
-          valor: co2,
-          tipoGrafica: 3,
+        child: VariableCardWeb(
+          title: "CO₂:",
+          value: co2,
+          chartType: 3,
           color: 'oscuro',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad suelo 2:",
-          valor: humidityS2,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad suelo 2:",
+          value: humidityS2,
+          chartType: 2,
           color: 'oscuro',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -55,18 +55,18 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Lista fila 3
     [
       Expanded(
-        child: CardCaudalWeb(
-          titulo: "Caudal",
-          numInvernadero: greenhouseNum,
+        child: FlowCardWeb(
+          title: "Caudal",
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad relativa:",
-          valor: humidity,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad relativa:",
+          value: humidity,
+          chartType: 2,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -75,21 +75,21 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Lista fila 1
     [
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Temperatura:",
-          valor: temperature,
-          tipoGrafica: 1,
+        child: VariableCardWeb(
+          title: "Temperatura:",
+          value: temperature,
+          chartType: 1,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad suelo 1:",
-          valor: humidityS1,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad suelo 1:",
+          value: humidityS1,
+          chartType: 2,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -97,21 +97,21 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Lista fila 2
     [
       Expanded(
-        child: CardVariableWeb(
-          titulo: "CO₂:",
-          valor: co2,
-          tipoGrafica: 3,
+        child: VariableCardWeb(
+          title: "CO₂:",
+          value: co2,
+          chartType: 3,
           color: 'oscuro',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad suelo 2:",
-          valor: humidityS2,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad suelo 2:",
+          value: humidityS2,
+          chartType: 2,
           color: 'oscuro',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -119,18 +119,18 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
     // Lista fila 3
     [
       Expanded(
-        child: CardCaudalWeb(
-          titulo: "Caudal",
-          numInvernadero: greenhouseNum,
+        child: FlowCardWeb(
+          title: "Caudal",
+          greenhouseNum: greenhouseNum,
         ),
       ),
       Expanded(
-        child: CardVariableWeb(
-          titulo: "Humedad relativa:",
-          valor: humidity,
-          tipoGrafica: 2,
+        child: VariableCardWeb(
+          title: "Humedad relativa:",
+          value: humidity,
+          chartType: 2,
           color: 'generico',
-          numInvernadero: greenhouseNum,
+          greenhouseNum: greenhouseNum,
         ),
       ),
     ],
@@ -141,8 +141,8 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
       Expanded(
         child: Padding(
           padding: const EdgeInsets.only(right: 15, top: 15),
-          child: graf1Linea(
-            titulo: "Temperatura",
+          child: LineGraph1(
+            title: "Temperatura",
             data: temperatureData,
           ),
         ),
@@ -150,8 +150,8 @@ List<List<Widget>> getGridData(String temperature, String humidity, String humid
       Expanded(
         child: Padding(
           padding: const EdgeInsets.only(right: 15, top: 15),
-          child: graf1Linea(
-            titulo: "Humedad",
+          child: LineGraph1(
+            title: "Humedad",
             data: humidityData,
           ),
         ),

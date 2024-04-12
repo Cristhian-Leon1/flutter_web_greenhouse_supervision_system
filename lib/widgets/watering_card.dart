@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
-class CardRiego extends StatefulWidget {
-
-  final Widget imagen;
-  final String titulo;
+class WateringCard extends StatefulWidget {
+  final Widget image;
+  final String title;
 
   final bool valueSwitch;
   final ValueChanged<bool> onChanged;
 
-  const CardRiego({super.key, required this.imagen,required this.titulo, required this.valueSwitch, required this.onChanged});
+  const WateringCard({super.key,
+    required this.image,
+    required this.title,
+    required this.valueSwitch,
+    required this.onChanged});
 
   @override
-  State<CardRiego> createState() => _CardRiegoState();
+  State<WateringCard> createState() => _WateringCardState();
 }
 
-class _CardRiegoState extends State<CardRiego> {
+class _WateringCardState extends State<WateringCard> {
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class _CardRiegoState extends State<CardRiego> {
                 flex: 2,
                 child: Center(
                   child: Text(
-                    widget.titulo,
+                    widget.title,
                     style: const TextStyle(fontSize: 20,),
                   ),
                 ),
@@ -49,8 +52,8 @@ class _CardRiegoState extends State<CardRiego> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(child: widget.imagen),
-                    Expanded(
+                    Expanded(child: widget.image),
+                    const Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -68,23 +71,24 @@ class _CardRiegoState extends State<CardRiego> {
   }
 }
 
-
-
-class CardRiegoCell extends StatefulWidget {
-
-  late final Widget imagen;
-  late final String titulo;
+class WateringCardCell extends StatefulWidget {
+  final Widget image;
+  final String title;
 
   final bool valueSwitch;
   final ValueChanged<bool> onChanged;
 
-  CardRiegoCell({super.key, required this.imagen,required this.titulo, required this.valueSwitch, required this.onChanged});
+  const WateringCardCell({super.key,
+    required this.image,
+    required this.title,
+    required this.valueSwitch,
+    required this.onChanged});
 
   @override
-  State<CardRiegoCell> createState() => _CardRiegoCellState();
+  State<WateringCardCell> createState() => _WateringCardCellState();
 }
 
-class _CardRiegoCellState extends State<CardRiegoCell> {
+class _WateringCardCellState extends State<WateringCardCell> {
 
   @override
   Widget build(BuildContext context) {
@@ -109,15 +113,15 @@ class _CardRiegoCellState extends State<CardRiegoCell> {
                 flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.brown[200],
-                      borderRadius: const BorderRadius.only (
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)
-                      )
+                    color: Colors.brown[200],
+                    borderRadius: const BorderRadius.only (
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)
+                    )
                   ),
                   child: Center(
                     child: Text(
-                      widget.titulo,
+                      widget.title,
                       style: const TextStyle(fontSize: 20,),
                     ),
                   ),
@@ -128,13 +132,13 @@ class _CardRiegoCellState extends State<CardRiegoCell> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(child: widget.imagen),
-                    Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                          ],
-                        )
+                    Expanded(child: widget.image),
+                    const Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                        ],
+                      )
                     )
                   ],
                 ),

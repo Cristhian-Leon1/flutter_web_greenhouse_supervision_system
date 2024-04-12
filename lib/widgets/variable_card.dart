@@ -4,19 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../views/flow_table_screen.dart';
-import '../views/table_screen.dart';
-import 'Grafica.dart';
 
-class CardVariableCell extends StatelessWidget {
+class VariableCardCell extends StatelessWidget {
+  final String title;
+  final String value;
 
-  final String titulo;
-  final String valor;
-
-  const CardVariableCell({Key? key, required this.titulo, required this.valor, }) : super(key: key);
+  const VariableCardCell({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width  = MediaQuery.of(context).size.width;
 
@@ -42,7 +38,7 @@ class CardVariableCell extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      titulo,
+                      title,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black87,
@@ -56,7 +52,7 @@ class CardVariableCell extends StatelessWidget {
                 flex: 2,
                 child: Center(
                   child: Text(
-                    valor,
+                    value,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -74,20 +70,22 @@ class CardVariableCell extends StatelessWidget {
 }
 
 
-class CardVariableWeb extends StatelessWidget {
-
-  final String titulo;
-  final String valor;
-  final int tipoGrafica;
+class VariableCardWeb extends StatelessWidget {
+  final String title;
+  final String value;
+  final int chartType;
   final String color;
-  final int numInvernadero;
+  final int greenhouseNum;
 
-
-  const CardVariableWeb({Key? key, required this.titulo, required this.valor, required this.tipoGrafica, required this.color, required this.numInvernadero, }) : super(key: key);
+  const VariableCardWeb({super.key,
+    required this.title,
+    required this.value,
+    required this.chartType,
+    required this.color,
+    required this.greenhouseNum});
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width  = MediaQuery.of(context).size.width;
 
@@ -97,7 +95,7 @@ class CardVariableWeb extends StatelessWidget {
         elevation: 6,
         borderRadius: BorderRadius.circular(15),
         child: Container(
-          height: numInvernadero == 3 ? height * 0.42 : height * 0.265,
+          height: greenhouseNum == 3 ? height * 0.42 : height * 0.265,
           width: width * 0.35,
           decoration: BoxDecoration(
             color: color == "oscuro" ? Colors.brown[200] : Colors.brown[100] ,
@@ -113,7 +111,7 @@ class CardVariableWeb extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          titulo,
+                          title,
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: 18),
                         ),
@@ -121,10 +119,10 @@ class CardVariableWeb extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          tipoGrafica == 1 ? "$valor °C" :
-                          tipoGrafica == 2 ? "$valor %" :
-                          tipoGrafica == 3 ? "$valor ppm" :
-                          valor,
+                          chartType == 1 ? "$value °C" :
+                          chartType == 2 ? "$value %" :
+                          chartType == 3 ? "$value ppm" :
+                          value,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -141,18 +139,18 @@ class CardVariableWeb extends StatelessWidget {
 }
 
 
-class CardCaudalWeb extends StatefulWidget {
+class FlowCardWeb extends StatefulWidget {
 
-  final String titulo;
-  final int numInvernadero;
+  final String title;
+  final int greenhouseNum;
 
-  const CardCaudalWeb({super.key, required this.titulo, required this.numInvernadero});
+  const FlowCardWeb({super.key, required this.title, required this.greenhouseNum});
 
   @override
-  CardCaudalWebState createState() => CardCaudalWebState();
+  FlowCardWebState createState() => FlowCardWebState();
 }
 
-class CardCaudalWebState extends State<CardCaudalWeb> {
+class FlowCardWebState extends State<FlowCardWeb> {
 
   List<Map<String, dynamic>> _data = [];
 
@@ -160,7 +158,7 @@ class CardCaudalWebState extends State<CardCaudalWeb> {
   bool _uploadData = false;
 
   // Petición get para la tabla en siguiente pantalla
-  Future<void> _dataCompleteCaudal(int numInvernadero) async {
+  Future<void> _dataCompleteCaudal(int greenhouseNum) async {
     try {
       setState(() {
         _processing = true;
@@ -184,7 +182,7 @@ class CardCaudalWebState extends State<CardCaudalWeb> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  TablaCaudal(data: _data, numInvernadero: numInvernadero),
+                  FlowTablePage(data: _data, greenhouseNum: greenhouseNum),
             ),
           );
         }
@@ -222,7 +220,7 @@ class CardCaudalWebState extends State<CardCaudalWeb> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                '${widget.titulo} (m³/s):',
+                '${widget.title} (m³/s):',
                 style: const TextStyle(fontSize: 18),
               ),
               Padding(
@@ -237,7 +235,7 @@ class CardCaudalWebState extends State<CardCaudalWeb> {
                     backgroundColor: const Color(0xff073775),
                   ),
                   onPressed: (){
-                    _dataCompleteCaudal(widget.numInvernadero);
+                    _dataCompleteCaudal(widget.greenhouseNum);
                   },
                   child: const Text(
                     'Registro de caudal',

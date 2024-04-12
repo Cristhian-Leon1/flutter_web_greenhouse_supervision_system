@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter_web_greenhouse_supervision_system/views/home_screen.dart';
 import 'package:flutter_web_greenhouse_supervision_system/views/table_screen.dart';
-import 'package:flutter_web_greenhouse_supervision_system/widgets/CardInfoAnalisis.dart';
-import 'package:flutter_web_greenhouse_supervision_system/widgets/CardVariables.dart';
-import 'package:flutter_web_greenhouse_supervision_system/widgets/CardRiego.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/information_image_card.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/variable_card.dart';
+import 'package:flutter_web_greenhouse_supervision_system/widgets/watering_card.dart';
 import 'package:flutter_web_greenhouse_supervision_system/utils/data_images_descriptions.dart';
 import 'package:flutter_web_greenhouse_supervision_system/utils/data_grid.dart';
-import '../widgets/Graf1Linea.dart';
+import '../widgets/single_variable_graph.dart';
 
 class MonitoringPage extends StatefulWidget {
   final int greenhouseNum;
@@ -390,7 +390,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
                               });
                             },
                             itemBuilder: (context, index) {
-                              return ImagenCardInfo(
+                              return InformationImageCard(
                                 Image.asset(
                                   widget.greenhouseNum == 1 ? imagesGreenhouse1[index] :
                                   widget.greenhouseNum == 2 ? imagesGreenhouse2[index] :
@@ -477,16 +477,16 @@ class _MonitoringPageState extends State<MonitoringPage> {
                            Expanded(
                              child: Padding(
                                padding: const EdgeInsets.only(right: 15, top: 15, bottom: 15),
-                               child: graf1Linea(
-                                 titulo: "CO2",
+                               child: LineGraph1(
+                                 title: "CO2",
                                  data: co2Data,
                                ),
                              ),
                            ),
                            Expanded(
-                             child: CardRiego(
-                               titulo: 'Sistema de riego',
-                               imagen: Padding(
+                             child: WateringCard(
+                               title: 'Sistema de riego',
+                               image: Padding(
                                  padding: const EdgeInsets.only(left: 30, bottom: 20),
                                  child: Image.asset('assets/riego.png',height: height * 0.2),
                                ),
@@ -602,7 +602,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
                                     });
                                   },
                                   itemBuilder: (context, index) {
-                                    return ImagenCardInfo(
+                                    return InformationImageCard(
                                       Image.asset(
                                         widget.greenhouseNum == 1 ? imagesGreenhouse1[index] :
                                         widget.greenhouseNum == 2 ? imagesGreenhouse2[index] :
@@ -625,12 +625,12 @@ class _MonitoringPageState extends State<MonitoringPage> {
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Column(
                     children: [
-                      CardVariableCell(titulo: "La temperatura medida es:", valor: "$temperature °C"),
-                      CardVariableCell(titulo: "El CO₂ medido es:", valor: "$co2S1 ppm"),
-                      CardVariableCell(titulo: "El caudal medido es:", valor: "$co2S2 ppm"),
-                      CardVariableCell(titulo: "El nivel de humedad suelo 1 es:", valor: "$humidityS1 %"),
-                      CardVariableCell(titulo: "El nivel de humedad suelo 2 es:", valor: "$humidityS2 %"),
-                      CardVariableCell(titulo: "Humedad relativa:", valor: "$humidity %"),
+                      VariableCardCell(title: "La temperatura medida es:", value: "$temperature °C"),
+                      VariableCardCell(title: "El CO₂ medido es:", value: "$co2S1 ppm"),
+                      VariableCardCell(title: "El caudal medido es:", value: "$co2S2 ppm"),
+                      VariableCardCell(title: "El nivel de humedad suelo 1 es:", value: "$humidityS1 %"),
+                      VariableCardCell(title: "El nivel de humedad suelo 2 es:", value: "$humidityS2 %"),
+                      VariableCardCell(title: "Humedad relativa:", value: "$humidity %"),
                       const Padding(padding: EdgeInsets.only(bottom: 10))
                     ]
                   ),
@@ -639,11 +639,11 @@ class _MonitoringPageState extends State<MonitoringPage> {
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Column(
                     children: [
-                      CardVariableCell(titulo: "La temperatura medida es:", valor: "$temperature °C"),
-                      CardVariableCell(titulo: "El CO₂ medido es:", valor: "$co2 ppm"),
-                      CardVariableCell(titulo: "El nivel de humidity suelo 1 es:", valor: "$humidityS1 %"),
-                      CardVariableCell(titulo: "El nivel de humidity suelo 2 es:", valor: "$humidityS2 %"),
-                      CardVariableCell(titulo: "Humedad relativa:", valor: "$humidity %"),
+                      VariableCardCell(title: "La temperatura medida es:", value: "$temperature °C"),
+                      VariableCardCell(title: "El CO₂ medido es:", value: "$co2 ppm"),
+                      VariableCardCell(title: "El nivel de humidity suelo 1 es:", value: "$humidityS1 %"),
+                      VariableCardCell(title: "El nivel de humidity suelo 2 es:", value: "$humidityS2 %"),
+                      VariableCardCell(title: "Humedad relativa:", value: "$humidity %"),
                       const Padding(padding: EdgeInsets.only(bottom: 10))
                     ]
                   ),
@@ -652,9 +652,9 @@ class _MonitoringPageState extends State<MonitoringPage> {
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Column(
                     children: [
-                      CardVariableCell(titulo: "La temperature medida es:", valor: "$temperature °C"),
-                      CardVariableCell(titulo: "La nivel de humidity medido es:", valor: "$humidity %"),
-                      CardVariableCell(titulo: "El nivel de CO₂ medido es:", valor: "$co2 ppm"),
+                      VariableCardCell(title: "La temperature medida es:", value: "$temperature °C"),
+                      VariableCardCell(title: "La nivel de humidity medido es:", value: "$humidity %"),
+                      VariableCardCell(title: "El nivel de CO₂ medido es:", value: "$co2 ppm"),
                       const Padding(padding: EdgeInsets.only(bottom: 10))
                     ]
                   ),
@@ -663,12 +663,12 @@ class _MonitoringPageState extends State<MonitoringPage> {
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Column(
                     children: [
-                      CardVariableCell(titulo: "La temperature medida es:", valor: "$temperature °C"),
-                      CardVariableCell(titulo: "La nivel de humidity medido es:", valor: "$humidity %"),
-                      CardVariableCell(titulo: "El  nivel de CO₂ medido es:", valor: "$co2 ppm"),
-                      CardRiegoCell(
-                        titulo: 'Sistema de riego',
-                        imagen: Padding(
+                      VariableCardCell(title: "La temperature medida es:", value: "$temperature °C"),
+                      VariableCardCell(title: "La nivel de humidity medido es:", value: "$humidity %"),
+                      VariableCardCell(title: "El  nivel de CO₂ medido es:", value: "$co2 ppm"),
+                      WateringCardCell(
+                        title: 'Sistema de riego',
+                        image: Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: Image.asset('assets/riego.png',height: height * 0.15),
                         ),

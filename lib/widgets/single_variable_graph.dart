@@ -2,11 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class _LineChart extends StatelessWidget {
-  final String tipoGrafica;
+  final String chartType;
   final bool isShowingMainData;
   final List<FlSpot> data;
 
-  const _LineChart({required this.isShowingMainData, required this.tipoGrafica, required this.data});
+  const _LineChart({required this.isShowingMainData, required this.chartType, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class _LineChart extends StatelessWidget {
       bottomTitles: SideTitles(
         showTitles: true,
         getTextStyles: (context, value) => TextStyle(
-          fontSize: tipoGrafica == 'Temperatura' ? 12 :
-          tipoGrafica == 'Humedad' ? 12 :
-          tipoGrafica == 'CO2' ? 12 : 0,
+          fontSize: chartType == 'Temperatura' ? 12 :
+          chartType == 'Humedad' ? 12 :
+          chartType == 'CO2' ? 12 : 0,
         ),
         getTitles: (value) {
           switch (value.toInt()) {
@@ -77,14 +77,14 @@ class _LineChart extends StatelessWidget {
         margin: 10,
         showTitles: true,
         getTextStyles: (context, value) => TextStyle(
-          fontSize: tipoGrafica == 'Temperatura' ? 12 :
-          tipoGrafica == 'Humedad' ? 11 :
-          tipoGrafica == 'CO2' ? 9.3 : 0,
+          fontSize: chartType == 'Temperatura' ? 12 :
+          chartType == 'Humedad' ? 11 :
+          chartType == 'CO2' ? 9.3 : 0,
         ),
         getTitles: (value){
-          return tipoGrafica == 'Temperatura' ? '${value.toInt()}°' :
-          tipoGrafica == 'CO2' ? '${value.toInt()} ppm' :
-          tipoGrafica == 'Humedad' ? '${value.toInt()}%' :
+          return chartType == 'Temperatura' ? '${value.toInt()}°' :
+          chartType == 'CO2' ? '${value.toInt()} ppm' :
+          chartType == 'Humedad' ? '${value.toInt()}%' :
           '${value.toInt()}';
         },
       ),
@@ -98,9 +98,9 @@ class _LineChart extends StatelessWidget {
       lineBarsData: lineBarsData1,
       minX: 0,
       maxX: 20,
-      maxY: tipoGrafica == 'Temperatura' ? 50 :
-      tipoGrafica == 'Humedad' ? 102 :
-      tipoGrafica == 'CO2' ? 2000 : 0,
+      maxY: chartType == 'Temperatura' ? 50 :
+      chartType == 'Humedad' ? 102 :
+      chartType == 'CO2' ? 2000 : 0,
       minY: 0,
     );
 
@@ -111,9 +111,9 @@ class _LineChart extends StatelessWidget {
       bottomTitles: SideTitles(
         showTitles: true,
         getTextStyles: (context, value) => TextStyle(
-          fontSize: tipoGrafica == 'Temperatura' ? 12 :
-          tipoGrafica == 'Humedad' ? 12 :
-          tipoGrafica == 'CO2' ? 12 : 0,
+          fontSize: chartType == 'Temperatura' ? 12 :
+          chartType == 'Humedad' ? 12 :
+          chartType == 'CO2' ? 12 : 0,
         ),
         getTitles: (value) {
           switch (value.toInt()) {
@@ -170,14 +170,14 @@ class _LineChart extends StatelessWidget {
         margin: 10,
         showTitles: true,
         getTextStyles: (context, value) => TextStyle(
-          fontSize: tipoGrafica == 'Temperatura' ? 12 :
-          tipoGrafica == 'Humedad' ? 12 :
-          tipoGrafica == 'CO2' ? 9.3 : 0,
+          fontSize: chartType == 'Temperatura' ? 12 :
+          chartType == 'Humedad' ? 12 :
+          chartType == 'CO2' ? 9.3 : 0,
         ),
         getTitles: (value) {
-          return tipoGrafica == 'Temperatura' ? '${value.toInt()}°' :
-          tipoGrafica == 'CO2' ? '${value.toInt()} ppm' :
-          tipoGrafica == 'Humedad' ? '${value.toInt()}%' :
+          return chartType == 'Temperatura' ? '${value.toInt()}°' :
+          chartType == 'CO2' ? '${value.toInt()} ppm' :
+          chartType == 'Humedad' ? '${value.toInt()}%' :
           '${value.toInt()}';
         },
       ),
@@ -191,9 +191,9 @@ class _LineChart extends StatelessWidget {
       lineBarsData: lineBarsData2,
       minX: 0,
       maxX: 20,
-      maxY: tipoGrafica == 'Temperatura' ? 52 :
-      tipoGrafica == 'Humedad' ? 100 :
-      tipoGrafica == 'CO2' ? 2000 : 0,
+      maxY: chartType == 'Temperatura' ? 52 :
+      chartType == 'Humedad' ? 100 :
+      chartType == 'CO2' ? 2000 : 0,
       minY: 0,
     );
 
@@ -238,9 +238,9 @@ class _LineChart extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
     isCurved: true,
-    colors: tipoGrafica == 'Temperatura' ? [const Color(0xFFad3333)] :
-    tipoGrafica == 'Humedad' ? [Colors.amber] :
-    tipoGrafica == 'CO2' ? [Colors.green] : [Colors.grey],
+    colors: chartType == 'Temperatura' ? [const Color(0xFFad3333)] :
+    chartType == 'Humedad' ? [Colors.amber] :
+    chartType == 'CO2' ? [Colors.green] : [Colors.grey],
     barWidth: 5,
     isStrokeCapRound: true,
     dotData: FlDotData(show: false),
@@ -251,17 +251,17 @@ class _LineChart extends StatelessWidget {
   LineChartBarData get lineChartBarData2_1 => LineChartBarData(
     isCurved: true,
     curveSmoothness: 0,
-    colors: tipoGrafica == 'Temperatura' ? [const Color(0xFFad3333).withOpacity(0.5)] :
-    tipoGrafica == 'Humedad' ? [Colors.amber.withOpacity(0.5)] :
-    tipoGrafica == 'CO2' ? [Colors.green.withOpacity(0.5)] : [Colors.grey.withOpacity(0.5)],
+    colors: chartType == 'Temperatura' ? [const Color(0xFFad3333).withOpacity(0.5)] :
+    chartType == 'Humedad' ? [Colors.amber.withOpacity(0.5)] :
+    chartType == 'CO2' ? [Colors.green.withOpacity(0.5)] : [Colors.grey.withOpacity(0.5)],
     barWidth: 4,
     isStrokeCapRound: true,
     dotData: FlDotData(show: false),
     belowBarData: BarAreaData(
       show: true,
-      colors: tipoGrafica == 'Temperatura' ? [const Color(0xFFad3333).withOpacity(0.2)] :
-      tipoGrafica == 'Humedad' ? [Colors.amber.withOpacity(0.2)] :
-      tipoGrafica == 'CO2' ? [Colors.green.withOpacity(0.2)] : [Colors.grey.withOpacity(0.2)],
+      colors: chartType == 'Temperatura' ? [const Color(0xFFad3333).withOpacity(0.2)] :
+      chartType == 'Humedad' ? [Colors.amber.withOpacity(0.2)] :
+      chartType == 'CO2' ? [Colors.green.withOpacity(0.2)] : [Colors.grey.withOpacity(0.2)],
     ),
     spots: data,
   );
@@ -281,17 +281,17 @@ FlBorderData get borderData => FlBorderData(
 );
 
 
-class graf1Linea extends StatefulWidget {
-  final String titulo;
+class LineGraph1 extends StatefulWidget {
+  final String title;
   final List<FlSpot> data;
 
-  const graf1Linea({super.key, required this.titulo, required this.data});
+  const LineGraph1({super.key, required this.title, required this.data});
 
   @override
-  State<StatefulWidget> createState() => graf1LineaState();
+  State<StatefulWidget> createState() => LineGraph1State();
 }
 
-class graf1LineaState extends State<graf1Linea> {
+class LineGraph1State extends State<LineGraph1> {
   late bool isShowingMainData;
 
   @override
@@ -325,7 +325,7 @@ class graf1LineaState extends State<graf1Linea> {
                   height: 20,
                 ),
                 Text(
-                  widget.titulo,
+                  widget.title,
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -340,7 +340,7 @@ class graf1LineaState extends State<graf1Linea> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16, left: 6),
-                    child: _LineChart(isShowingMainData: isShowingMainData, tipoGrafica: widget.titulo, data: widget.data),
+                    child: _LineChart(isShowingMainData: isShowingMainData, chartType: widget.title, data: widget.data),
                   ),
                 ),
                 const SizedBox(
