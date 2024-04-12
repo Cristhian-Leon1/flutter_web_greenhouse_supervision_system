@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_web_greenhouse_supervision_system/views/Home.dart';
+import 'package:flutter_web_greenhouse_supervision_system/views/home_screen.dart';
 import 'package:flutter_web_greenhouse_supervision_system/views/TablaConpleta.dart';
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardInfoAnalisis.dart';
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardVariables.dart';
@@ -252,7 +252,7 @@ class _SupervisionPageState extends State<SupervisionPage> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Home(nameUser: widget.username),
+                    builder: (context) => HomePage(username: widget.username),
                   ),
                 );
               },

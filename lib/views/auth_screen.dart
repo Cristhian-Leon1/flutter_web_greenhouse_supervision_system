@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:flutter_web_greenhouse_supervision_system/views/Home.dart';
+import 'package:flutter_web_greenhouse_supervision_system/views/home_screen.dart';
 
 
 class AuthPage extends StatefulWidget {
@@ -78,7 +78,7 @@ class _AuthPageState extends State<AuthPage> {
 
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => Home(nameUser: userName),
+              builder: (context) => HomePage(username: userName),
             ),
           );
         } else {
