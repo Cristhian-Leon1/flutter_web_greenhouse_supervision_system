@@ -624,7 +624,7 @@ class _SupervisionPageState extends State<SupervisionPage> {
                 widget.greenhouseNum == 1 ? Padding(
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Column(
-                      children: [
+                    children: [
                       CardVariableCell(titulo: "La temperatura medida es:", valor: "$temperature °C"),
                       CardVariableCell(titulo: "El CO₂ medido es:", valor: "$co2S1 ppm"),
                       CardVariableCell(titulo: "El caudal medido es:", valor: "$co2S2 ppm"),
@@ -637,7 +637,8 @@ class _SupervisionPageState extends State<SupervisionPage> {
                 )
                 : widget.greenhouseNum == 2 ? Padding(
                   padding: const EdgeInsets.only(bottom: 15),
-                  child: Column(children: [
+                  child: Column(
+                    children: [
                       CardVariableCell(titulo: "La temperatura medida es:", valor: "$temperature °C"),
                       CardVariableCell(titulo: "El CO₂ medido es:", valor: "$co2 ppm"),
                       CardVariableCell(titulo: "El nivel de humidity suelo 1 es:", valor: "$humidityS1 %"),
@@ -649,12 +650,14 @@ class _SupervisionPageState extends State<SupervisionPage> {
                 ) :
                 widget.greenhouseNum == 2 ? Padding(
                   padding: const EdgeInsets.only(bottom: 15),
-                  child: Column(children: [
-                    CardVariableCell(titulo: "La temperature medida es:", valor: "$temperature °C"),
-                    CardVariableCell(titulo: "La nivel de humidity medido es:", valor: "$humidity %"),
-                    CardVariableCell(titulo: "El nivel de CO₂ medido es:", valor: "$co2 ppm"),
-                    const Padding(padding: EdgeInsets.only(bottom: 10))
-                  ]),
+                  child: Column(
+                    children: [
+                      CardVariableCell(titulo: "La temperature medida es:", valor: "$temperature °C"),
+                      CardVariableCell(titulo: "La nivel de humidity medido es:", valor: "$humidity %"),
+                      CardVariableCell(titulo: "El nivel de CO₂ medido es:", valor: "$co2 ppm"),
+                      const Padding(padding: EdgeInsets.only(bottom: 10))
+                    ]
+                  ),
                 ) :
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15),
