@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../views/TablaCaudal.dart';
-import '../views/TablaConpleta.dart';
+import '../views/flow_table_screen.dart';
+import '../views/table_screen.dart';
 import 'Grafica.dart';
 
 class CardVariableCell extends StatelessWidget {

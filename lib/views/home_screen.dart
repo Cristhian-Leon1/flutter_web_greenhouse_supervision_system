@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardInvernadero.dart';
-import 'supervision_screen.dart';
+import 'monitoring_screen.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                            MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                            MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                          MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                          MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                          MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) =>
-                          SupervisionPage(greenhouseNum: greenhouseNum, username: widget.username)
+                          MonitoringPage(greenhouseNum: greenhouseNum, username: widget.username)
                         )
                       );
                     },

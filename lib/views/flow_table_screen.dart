@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
-import 'dart:typed_data';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:excel/excel.dart' as excel;
 import 'package:data_table_2/data_table_2.dart' as DataTable2;
 
-class TablaCaudal extends StatefulWidget {
+class FlowTablePage extends StatefulWidget {
   final List<Map<String, dynamic>> data;
-  final int numInvernadero;
-  const TablaCaudal({super.key, required this.data, required this.numInvernadero});
+  final int greenhouseNum;
+
+  const FlowTablePage({super.key, required this.data, required this.greenhouseNum});
 
   @override
-  State<TablaCaudal> createState() => _TablaCaudalState();
+  State<FlowTablePage> createState() => _FlowTablePageState();
 }
 
-class _TablaCaudalState extends State<TablaCaudal> {
+class _FlowTablePageState extends State<FlowTablePage> {
 
   late List<Map<String, dynamic>> dataSemana;
   late int _totalPages;
 
   int _currentPage = 1;
   final int _perPage = 20;
-
-  String temperatura = "0";
-  String humedad =  "0";
-  String co2 = "0";
-  String humedadS1 = "0";
-  String humedadS2 = "0";
 
   bool _processing = false;
 

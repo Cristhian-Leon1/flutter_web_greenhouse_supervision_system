@@ -5,7 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_web_greenhouse_supervision_system/views/home_screen.dart';
-import 'package:flutter_web_greenhouse_supervision_system/views/TablaConpleta.dart';
+import 'package:flutter_web_greenhouse_supervision_system/views/table_screen.dart';
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardInfoAnalisis.dart';
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardVariables.dart';
 import 'package:flutter_web_greenhouse_supervision_system/widgets/CardRiego.dart';
@@ -13,17 +13,17 @@ import 'package:flutter_web_greenhouse_supervision_system/utils/data_images_desc
 import 'package:flutter_web_greenhouse_supervision_system/utils/data_grid.dart';
 import '../widgets/Graf1Linea.dart';
 
-class SupervisionPage extends StatefulWidget {
+class MonitoringPage extends StatefulWidget {
   final int greenhouseNum;
   final String username;
 
-  const SupervisionPage({super.key, required this.greenhouseNum, required this.username});
+  const MonitoringPage({super.key, required this.greenhouseNum, required this.username});
 
   @override
-  State<SupervisionPage> createState() => _SupervisionPageState();
+  State<MonitoringPage> createState() => _MonitoringPageState();
 }
 
-class _SupervisionPageState extends State<SupervisionPage> {
+class _MonitoringPageState extends State<MonitoringPage> {
   List<Map<String, dynamic>> _data = [];
 
   String? temperature = "0";
@@ -138,7 +138,7 @@ class _SupervisionPageState extends State<SupervisionPage> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  TablaCompleta(data: _data, numInvernadero: greenhouseNum),
+                  TablePage(data: _data, greenhouseNum: greenhouseNum),
             ),
           );
         }

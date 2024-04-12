@@ -4,79 +4,71 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:excel/excel.dart' as excel;
 import 'package:data_table_2/data_table_2.dart' as DataTable2;
 
-class TablaCompleta extends StatefulWidget {
+class TablePage extends StatefulWidget {
   final List<Map<String, dynamic>> data;
-  final int numInvernadero;
-  const TablaCompleta({super.key, required this.data, required this.numInvernadero});
+  final int greenhouseNum;
+
+  const TablePage({super.key, required this.data, required this.greenhouseNum});
 
   @override
-  State<TablaCompleta> createState() => _TablaCompletaState();
+  State<TablePage> createState() => _TablePageState();
 }
 
-class _TablaCompletaState extends State<TablaCompleta> {
-
-  late List<Map<String, dynamic>> dataSemana;
+class _TablePageState extends State<TablePage> {
   late int _totalPages;
-
-  int _currentPage = 1;
   final int _perPage = 20;
+  int _currentPage = 1;
 
-  String temperatura = "0";
-  String humedad =  "0";
-  String co2 = "0";
-  String humedadS1 = "0";
-  String humedadS2 = "0";
+  final bool _processing = false;
 
-  bool _processing = false;
-
-  void exportToExcel() {
+  void _exportToExcel() {
     var excelFile = excel.Excel.createExcel();
-
     var sheet = excelFile['Sheet1'];
-    widget.numInvernadero == 3 ? sheet.appendRow(['Temperatura', 'CO2', 'Humedad_relativa', 'Fecha_hora']) :
-                                 sheet.appendRow(['Temperatura', 'CO2', 'Humedad_relativa', 'Humedad_s1', 'Humedad_s2', 'Fecha_hora']);
 
-    for (var rowData in widget.data) {
-      switch (widget.numInvernadero) {
-        case 1:
-          sheet.appendRow([
-            rowData['temperaturai1'],
-            rowData['co2i1'],
-            rowData['humedadi1'],
-            rowData['humedad_suelo1'],
-            rowData['humedad_suelo2'],
-            rowData['timestamp']
-          ]);
-          break;
-        case 2:
-          sheet.appendRow([
-            rowData['temperaturai2'],
-            rowData['co2i2'],
-            rowData['humedadi2'],
-            rowData['humedad_suelo1i2'],
-            rowData['humedad_suelo2i2'],
-            rowData['timestamp']
-          ]);
-          break;
-        case 3:
-          sheet.appendRow([
-            rowData['temperaturai3'],
-            rowData['co2i3'],
-            rowData['humedadi3'],
-            rowData['timestamp']
-          ]);
-          break;
-        default:
-          sheet.appendRow([
-            rowData['temperaturai1'],
-            rowData['co2i1'],
-            rowData['humedadi1'],
-            rowData['humedad_suelo1'],
-            rowData['humedad_suelo2'],
-            rowData['timestamp']
-          ]);
+    widget.greenhouseNum == 3
+    ? sheet.appendRow(['Temperatura', 'CO2', 'Humedad_relativa', 'Fecha_hora'])
+    : sheet.appendRow(['Temperatura', 'CO2', 'Humedad_relativa', 'Humedad_s1', 'Humedad_s2', 'Fecha_hora']);
+      for (var rowData in widget.data) {
+        switch (widget.greenhouseNum) {
+          case 1:
+            sheet.appendRow([
+              rowData['temperaturai1'],
+              rowData['co2i1'],
+              rowData['humedadi1'],
+              rowData['humedad_suelo1'],
+              rowData['humedad_suelo2'],
+              rowData['timestamp']
+            ]);
+            break;
+          case 2:
+            sheet.appendRow([
+              rowData['temperaturai2'],
+              rowData['co2i2'],
+              rowData['humedadi2'],
+              rowData['humedad_suelo1i2'],
+              rowData['humedad_suelo2i2'],
+              rowData['timestamp']
+            ]);
+            break;
+          case 3:
+            sheet.appendRow([
+              rowData['temperaturai3'],
+              rowData['co2i3'],
+              rowData['humedadi3'],
+              rowData['timestamp']
+            ]);
+            break;
+          default:
+            sheet.appendRow([
+              rowData['temperaturai1'],
+              rowData['co2i1'],
+              rowData['humedadi1'],
+              rowData['humedad_suelo1'],
+              rowData['humedad_suelo2'],
+              rowData['timestamp']
+            ]);
+        }
       }
-    }
 
     var bytes = excelFile.encode();
     final blob = html.Blob([bytes], 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -84,7 +76,7 @@ class _TablaCompletaState extends State<TablaCompleta> {
     final anchor = html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
-      ..download = 'DataSensores_i${widget.numInvernadero}.xlsx';
+      ..download = 'DataSensores_i${widget.greenhouseNum}.xlsx';
     html.document.body!.children.add(anchor);
     anchor.click();
     html.document.body!.children.remove(anchor);
@@ -93,14 +85,12 @@ class _TablaCompletaState extends State<TablaCompleta> {
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
     final startIndex = (_currentPage - 1) * _perPage;
     final endIndex = startIndex + _perPage > widget.data.length ?
                       widget.data.length : startIndex + _perPage;
-
     _totalPages = (widget.data.length / _perPage).ceil();
 
     return Scaffold(
@@ -128,54 +118,62 @@ class _TablaCompletaState extends State<TablaCompleta> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 List<DataColumn2> columns;
-                widget.numInvernadero == 3 ?  columns = [
-                  const DataColumn2(label: Text('Temperatura')),
-                  const DataColumn2(label: Text('CO2')),
-                  const DataColumn2(label: Text('Humedad_relativa')),
-                  const DataColumn2(label: Text('Fecha_hora')),
-                ]: columns = [
-                  const DataColumn2(label: Text('Temperatura')),
-                  const DataColumn2(label: Text('CO2')),
-                  const DataColumn2(label: Text('Humedad_relativa')),
-                  const DataColumn2(label: Text('Humedad_s1')),
-                  const DataColumn2(label: Text('Humedad_s2')),
-                  const DataColumn2(label: Text('Fecha_hora')),
-                ];
-
+                widget.greenhouseNum == 3
+                ?  columns = [
+                    const DataColumn2(label: Text('Temperatura')),
+                    const DataColumn2(label: Text('CO2')),
+                    const DataColumn2(label: Text('Humedad_relativa')),
+                    const DataColumn2(label: Text('Fecha_hora')),
+                  ]
+                : columns = [
+                    const DataColumn2(label: Text('Temperatura')),
+                    const DataColumn2(label: Text('CO2')),
+                    const DataColumn2(label: Text('Humedad_relativa')),
+                    const DataColumn2(label: Text('Humedad_s1')),
+                    const DataColumn2(label: Text('Humedad_s2')),
+                    const DataColumn2(label: Text('Fecha_hora')),
+                  ];
                 final paginatedData = snapshot.data!.sublist(startIndex, endIndex);
                 final rows = paginatedData.map((item) =>
-                      widget.numInvernadero == 1 ?
-                  DataRow(cells: [
-                      DataCell(Text(item['temperaturai1'].toString())),
-                      DataCell(Text(item['co2i1'].toString())),
-                      DataCell(Text(item['humedadi1'].toString())),
-                      DataCell(Text(item['humedad_suelo1'].toString())),
-                      DataCell(Text(item['humedad_suelo2'].toString())),
-                      DataCell(Text(item['timestamp'].toString())),
-                    ]
-                  ) : widget.numInvernadero == 2 ?
-                  DataRow(cells: [
-                    DataCell(Text(item['temperaturai2'].toString())),
-                    DataCell(Text(item['co2i2'].toString())),
-                    DataCell(Text(item['humedadi2'].toString())),
-                    DataCell(Text(item['humedad_suelo1i2'].toString())),
-                    DataCell(Text(item['humedad_suelo2i2'].toString())),
-                    DataCell(Text(item['timestamp'].toString())),
-                    ]
-                  ) : widget.numInvernadero == 3 ?
-                  DataRow(cells: [
-                      DataCell(Text(item['temperaturai3'].toString())),
-                      DataCell(Text(item['humedadi3'].toString())),
-                      DataCell(Text(item['co2i3'].toString())),
-                      DataCell(Text(item['timestamp'].toString())),
-                    ]
-                  )
-                    : DataRow(cells: [
-                  DataCell(Text(item['temperaturai1'].toString())),
-                  DataCell(Text(item['humedadi1'].toString())),
-                  DataCell(Text(item['co2i1'].toString())),
-                  DataCell(Text(item['timestamp'].toString())),
-                ]),
+                  widget.greenhouseNum == 1
+                  ? DataRow(
+                      cells: [
+                        DataCell(Text(item['temperaturai1'].toString())),
+                        DataCell(Text(item['co2i1'].toString())),
+                        DataCell(Text(item['humedadi1'].toString())),
+                        DataCell(Text(item['humedad_suelo1'].toString())),
+                        DataCell(Text(item['humedad_suelo2'].toString())),
+                        DataCell(Text(item['timestamp'].toString())),
+                      ]
+                    )
+                  : widget.greenhouseNum == 2
+                    ? DataRow(
+                        cells: [
+                          DataCell(Text(item['temperaturai2'].toString())),
+                          DataCell(Text(item['co2i2'].toString())),
+                          DataCell(Text(item['humedadi2'].toString())),
+                          DataCell(Text(item['humedad_suelo1i2'].toString())),
+                          DataCell(Text(item['humedad_suelo2i2'].toString())),
+                          DataCell(Text(item['timestamp'].toString())),
+                        ]
+                      )
+                    : widget.greenhouseNum == 3
+                      ? DataRow(
+                          cells: [
+                            DataCell(Text(item['temperaturai3'].toString())),
+                            DataCell(Text(item['humedadi3'].toString())),
+                            DataCell(Text(item['co2i3'].toString())),
+                            DataCell(Text(item['timestamp'].toString())),
+                          ]
+                        )
+                      : DataRow(
+                          cells: [
+                            DataCell(Text(item['temperaturai1'].toString())),
+                            DataCell(Text(item['humedadi1'].toString())),
+                            DataCell(Text(item['co2i1'].toString())),
+                            DataCell(Text(item['timestamp'].toString())),
+                          ]
+                        ),
                 ).toList();
 
                 return SingleChildScrollView(
@@ -208,25 +206,27 @@ class _TablaCompletaState extends State<TablaCompleta> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: _processing == false ? ElevatedButton(
+                              child: _processing == false
+                              ? ElevatedButton(
                                 onPressed: () {
-                                  exportToExcel();
+                                  _exportToExcel();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: const Color(0xfff7f7f7),
                                   backgroundColor: const Color(0xff073775),
                                 ),
                                 child: const Text("Exportar excel"),
-                              ) : const Center(child: CircularProgressIndicator(color: Color(0xff073775))),
+                              )
+                              : const Center(child: CircularProgressIndicator(color: Color(0xff073775))),
                             ),
                             ElevatedButton(
                               onPressed: _currentPage > 1
-                                  ? () {
-                                setState(() {
-                                  _currentPage--;
-                                });
-                              }
-                                  : null,
+                                ? () {
+                                  setState(() {
+                                    _currentPage--;
+                                  });
+                                }
+                                : null,
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: const Color(0xfff7f7f7),
                                 backgroundColor: const Color(0xff073775),
@@ -239,12 +239,12 @@ class _TablaCompletaState extends State<TablaCompleta> {
                             ),
                             ElevatedButton(
                               onPressed: endIndex < widget.data.length
-                                  ? () {
-                                setState(() {
-                                  _currentPage++;
-                                });
-                              }
-                                  : null,
+                                ? () {
+                                  setState(() {
+                                    _currentPage++;
+                                  });
+                                }
+                                : null,
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: const Color(0xfff7f7f7),
                                 backgroundColor: const Color(0xff073775),
@@ -274,12 +274,12 @@ class _TablaCompletaState extends State<TablaCompleta> {
                               children: [
                                 ElevatedButton(
                                   onPressed: _currentPage > 1
-                                      ? () {
-                                    setState(() {
-                                      _currentPage--;
-                                    });
-                                  }
-                                      : null,
+                                    ? () {
+                                      setState(() {
+                                        _currentPage--;
+                                      });
+                                    }
+                                    : null,
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: const Color(0xfff7f7f7),
                                     backgroundColor: const Color(0xff073775),
@@ -292,12 +292,12 @@ class _TablaCompletaState extends State<TablaCompleta> {
                                 ),
                                 ElevatedButton(
                                   onPressed: endIndex < widget.data.length
-                                      ? () {
-                                    setState(() {
-                                      _currentPage++;
-                                    });
-                                  }
-                                      : null,
+                                    ? () {
+                                      setState(() {
+                                        _currentPage++;
+                                      });
+                                    }
+                                    : null,
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: const Color(0xfff7f7f7),
                                     backgroundColor: const Color(0xff073775),
@@ -322,7 +322,7 @@ class _TablaCompletaState extends State<TablaCompleta> {
                               padding: const EdgeInsets.only(top: 10),
                               child: _processing == false ? ElevatedButton(
                                 onPressed: () {
-                                  exportToExcel();
+                                  _exportToExcel();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: const Color(0xfff7f7f7),
